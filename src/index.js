@@ -4,7 +4,7 @@ function isArrayOfFunctions(array) {
 
 const defaultTypes = ['PENDING', 'FULFILLED', 'REJECTED'];
 
-export default function sequenceMiddleware() {
+export default function sequenceMiddleware(config = {}) {
     const promiseTypeSuffixes = config.promiseTypeSuffixes || defaultTypes;
 
     return next => action => {
