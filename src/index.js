@@ -18,7 +18,7 @@ export default function sequenceMiddleware() {
         let promise;
 
         next({
-            type: `${type}_${PENDING}`
+            type: `${type}_${PENDING}`,
             ...meta ? { meta } : {}
         });
 
@@ -31,13 +31,13 @@ export default function sequenceMiddleware() {
         return promise.then(
             payload => next({
                 payload,
-                type: `${type}_${FULFILLED}`
+                type: `${type}_${FULFILLED}`,
                 ...meta ? { meta } : {}
             }),
             error => next({
                 payload: error,
                 error: true,
-                type: `${type}_${REJECTED}`
+                type: `${type}_${REJECTED}`,
                 ...meta ? { meta } : {}
             })
         );
