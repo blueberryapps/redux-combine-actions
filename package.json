@@ -1,6 +1,6 @@
 {
-  "name": "redux-sequence-actions",
-  "version": "0.1.2",
+  "name": "@blueberry/redux-sequence-actions",
+  "version": "0.1.4",
   "description": "Redux middleware for sequencing/chaining actions",
   "main": "lib/index.js",
   "scripts": {
