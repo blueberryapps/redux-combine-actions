@@ -7,7 +7,7 @@ const defaultTypes = ['PENDING', 'FULFILLED', 'REJECTED'];
 export default function sequenceMiddleware(config = {}) {
     const promiseTypeSuffixes = config.promiseTypeSuffixes || defaultTypes;
 
-    return () => {
+    return ({dispatch}) => {
         return next => action => {
             if (!isArrayOfFunctions(action.payload)) {
                 return next(action);
@@ -24,9 +24,9 @@ export default function sequenceMiddleware(config = {}) {
             });
 
             if (sequence) {
-                promise = actions.reduce((result, item) => result.then(() => next(item())), Promise.resolve());
+                promise = actions.reduce((result, item) => result.then(() => dispatch(item())), Promise.resolve());
             } else {
-                promise = Promise.all(actions.map(item => next(item())));
+                promise = Promise.all(actions.map(item => dispatch(item())));
             }
 
             return promise.then(
